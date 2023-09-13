@@ -17,5 +17,5 @@ def ec2():
         ec2.reboot_instances(InstanceIds=[instance_id])
     return render_template('index.html')
 if __name__ == '__main__':
-    app.run(host='18.217.242.51', port=80)
+    app.run(host='0.0.0.0', port=80)
 
