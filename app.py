@@ -10,16 +10,23 @@ def list_ec2_instances():
     # Retrieve a list of EC2 instances
     instances = ec2.describe_instances()
 
-    # Extract instance details
+    # Extract instance details, including the instance name
     instance_list = []
     for reservation in instances['Reservations']:
         for instance in reservation['Instances']:
+            instance_name = ""
+            for tag in instance.get('Tags', []):
+                if tag['Key'] == 'Name':
+                    instance_name = tag['Value']
+                    break
+
             instance_details = {
                 'InstanceID': instance['InstanceId'],
                 'InstanceType': instance['InstanceType'],
                 'State': instance['State']['Name'],
                 'PublicDNS': instance.get('PublicDnsName', 'N/A'),
-                'PrivateIP': instance['PrivateIpAddress']
+                'PrivateIP': instance['PrivateIpAddress'],
+                'InstanceName': instance_name,  # Add instance name
             }
             instance_list.append(instance_details)
 
