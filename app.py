@@ -1,5 +1,5 @@
 import boto3
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash, redirect
 
 app = Flask(__name__)
 # Initialize the Boto3 EC2 client
