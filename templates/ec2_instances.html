@@ -39,9 +39,9 @@
     <table>
         <tr>
             <th>Instance ID</th>
-            <th>Instance Type</th>
+            <th>Instance Name</th>
+            <th>State Type</th>
             <th>State</th>
-            <th>Public DNS</th>
             <th>Private IP</th>
             <th>Power On</th>
             <th>Power Off</th>
@@ -53,7 +53,6 @@
             <td>{{ instance['InstanceName'] }}</td>
             <td>{{ instance['InstanceType'] }}</td>
             <td>{{ instance['State'] }}</td>
-            <td>{{ instance['PublicDNS'] }}</td>
             <td>{{ instance['PrivateIP'] }}</td>
             <td>
                 <form action="/start_instance" method="post">
