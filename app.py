@@ -7,7 +7,7 @@ def index():
 @app.route('/ec2', methods=['POST'])
 def ec2():
     ec2 = boto3.client('ec2')
-    instance_id = request.form.get('i-07ee73a38da3f775a')
+    instance_id = request.form.get('instance_id')
     action = request.form.get('action')
     if action == 'start':
         ec2.start_instances(InstanceIds=[instance_id])
@@ -18,9 +18,9 @@ def ec2():
     return render_template('index.html')
 @app.route('/list_instances', methods=['GET'])
 def list_instances():
+    ec2 = boto3.client('ec2')
     # Retrieve a list of all EC2 instances
     instances = ec2.describe_instances()
-    
     # Extract and format instance information
     instance_data = []
     for reservation in instances['Reservations']:
