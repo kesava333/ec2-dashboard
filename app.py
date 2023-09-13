@@ -10,6 +10,8 @@ ec2 = boto3.client('ec2', region_name='us-east-2')
 def list_ec2_instances():
     # Retrieve a list of EC2 instances
     instances = ec2.describe_instances()
+    running_count = 0  # Initialize running instance count
+    stopped_count = 0  # Initialize stopped instance count
 
     # Extract instance details, including the instance name
     instance_list = []
@@ -28,9 +30,14 @@ def list_ec2_instances():
                 'InstanceName': instance_name,  # Add instance name
             }
             instance_list.append(instance_details)
+            # Count instances based on state
+            if instance_details['State'] == 'running':
+                running_count += 1
+            elif instance_details['State'] == 'stopped':
+                stopped_count += 1
     # Calculate the instance count
     instance_count = len(instance_list)
-    return render_template('ec2_instances.html', instances=instance_list, instance_count=instance_count)
+    return render_template('ec2_instances.html', instances=instance_list, instance_count=instance_count, running_count=running_count, stopped_count=stopped_count)
     
 @app.route('/start_instance', methods=['POST'])
 def start_instance():
