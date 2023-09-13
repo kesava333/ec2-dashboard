@@ -35,10 +35,7 @@
     </style>
 </head>
 <body>
-    <h1>EC2 Instances</h1>
-    <!-- ... (existing HTML code) ... -->
-
-<!-- Add a search box -->
+    <h1>EC2 Instances (Total: {{ instance_count }})</h1>
 <div>
     <label for="search">Search by Instance Name:</label>
     <input type="text" id="search" onkeyup="filterTable()" placeholder="Enter instance name...">
