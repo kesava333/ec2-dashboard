@@ -16,6 +16,7 @@ def ec2():
     elif action == 'reboot':
         ec2.reboot_instances(InstanceIds=[instance_id])
     return render_template('index.html')
+@app.route('/list_instances', methods=['GET'])
 def list_instances():
     # Retrieve a list of all EC2 instances
     instances = ec2.describe_instances()
