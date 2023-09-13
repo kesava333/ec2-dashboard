@@ -30,5 +30,6 @@ def list_instances():
     
     return render_template('list_instances.html', instances=instance_data)
 if __name__ == '__main__':
+    app.debug = True
     app.run(host='0.0.0.0', port=5000)
 
