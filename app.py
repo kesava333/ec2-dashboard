@@ -2,6 +2,7 @@ import boto3
 from flask import Flask, render_template, request, flash, redirect
 
 app = Flask(__name__)
+app.secret_key = 'Kcchow333#'
 # Initialize the Boto3 EC2 client
 ec2 = boto3.client('ec2', region_name='us-east-2')
 
