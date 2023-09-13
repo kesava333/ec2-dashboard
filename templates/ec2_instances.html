@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EC2 Instances</title>
+</head>
+<body>
+    <h1>EC2 Instances</h1>
+    <table>
+        <tr>
+            <th>Instance ID</th>
+            <th>Instance Type</th>
+            <th>State</th>
+            <th>Public DNS</th>
+            <th>Private IP</th>
+        </tr>
+        {% for instance in instances %}
+        <tr>
+            <td>{{ instance['InstanceID'] }}</td>
+            <td>{{ instance['InstanceType'] }}</td>
+            <td>{{ instance['State'] }}</td>
+            <td>{{ instance['PublicDNS'] }}</td>
+            <td>{{ instance['PrivateIP'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
