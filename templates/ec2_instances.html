@@ -36,44 +36,76 @@
 </head>
 <body>
     <h1>EC2 Instances</h1>
-    <table>
-        <tr>
-            <th>Instance ID</th>
-            <th>Instance Name</th>
-            <th>State Type</th>
-            <th>State</th>
-            <th>Private IP</th>
-            <th>Power On</th>
-            <th>Power Off</th>
-            <th>Terminate</th>
-        </tr>
-        {% for instance in instances %}
-        <tr>
-            <td>{{ instance['InstanceID'] }}</td>
-            <td>{{ instance['InstanceName'] }}</td>
-            <td>{{ instance['InstanceType'] }}</td>
-            <td>{{ instance['State'] }}</td>
-            <td>{{ instance['PrivateIP'] }}</td>
-            <td>
-                <form action="/start_instance" method="post">
-                    <input type="hidden" name="instance_id" value="{{ instance['InstanceID'] }}">
-                    <input type="submit" value="Start">
-                </form>
-            </td>
-            <td>
-                <form action="/stop_instance" method="post">
-                    <input type="hidden" name="instance_id" value="{{ instance['InstanceID'] }}">
-                    <input type="submit" value="Stop">
-                </form>
-            </td>
-            <td>
-                <form action="/terminate_instance" method="post">
-                    <input type="hidden" name="instance_id" value="{{ instance['InstanceID'] }}">
-                    <input type="submit" value="Terminate">
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    <!-- ... (existing HTML code) ... -->
+
+<!-- Add a search box -->
+<div>
+    <label for="search">Search by Instance Name:</label>
+    <input type="text" id="search" onkeyup="filterTable()" placeholder="Enter instance name...">
+</div>
+
+<table id="instanceTable">
+    <tr>
+        <th>Instance ID</th>
+        <th>Instance Name</th>
+        <th>State Type</th>
+        <th>State</th>
+        <th>Private IP</th>
+        <th>Power On</th>
+        <th>Power Off</th>
+        <th>Terminate</th>
+    </tr>
+    {% for instance in instances %}
+    <tr>
+        <td>{{ instance['InstanceID'] }}</td>
+        <td>{{ instance['InstanceName'] }}</td>
+        <td>{{ instance['InstanceType'] }}</td>
+        <td>{{ instance['State'] }}</td>
+        <td>{{ instance['PrivateIP'] }}</td>
+        <td>
+            <form action="/start_instance" method="post">
+                <input type="hidden" name="instance_id" value="{{ instance['InstanceID'] }}">
+                <input type="submit" value="Start">
+            </form>
+        </td>
+        <td>
+            <form action="/stop_instance" method="post">
+                <input type="hidden" name="instance_id" value="{{ instance['InstanceID'] }}">
+                <input type="submit" value="Stop">
+            </form>
+        </td>
+        <td>
+            <form action="/terminate_instance" method="post">
+                <input type="hidden" name="instance_id" value="{{ instance['InstanceID'] }}">
+                <input type="submit" value="Terminate">
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<script>
+    function filterTable() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("search");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("instanceTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, hide those that don't match the search query
+        for (i = 1; i < tr.length; i++) { // Start from 1 to skip the header row
+            td = tr[i].getElementsByTagName("td")[1]; // Change index to match the column with instance name
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>
