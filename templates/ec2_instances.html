@@ -50,7 +50,6 @@
         <th>Instance Name</th>
         <th>State Type</th>
         <th>State</th>
-        <th>Private IP</th>
         <th>Power On</th>
         <th>Power Off</th>
         <th>Terminate</th>
@@ -61,7 +60,6 @@
         <td>{{ instance['InstanceName'] }}</td>
         <td>{{ instance['InstanceType'] }}</td>
         <td>{{ instance['State'] }}</td>
-        <td>{{ instance['PrivateIP'] }}</td>
         <td>
             <form action="/start_instance" method="post">
                 <input type="hidden" name="instance_id" value="{{ instance['InstanceID'] }}">
