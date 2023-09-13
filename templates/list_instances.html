@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of EC2 Instances</title>
+</head>
+<body>
+    <h1>List of EC2 Instances</h1>
+    <table>
+        <tr>
+            <th>Instance ID</th>
+            <th>State</th>
+        </tr>
+        {% for instance in instances %}
+        <tr>
+            <td>{{ instance.InstanceID }}</td>
+            <td>{{ instance.State }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+

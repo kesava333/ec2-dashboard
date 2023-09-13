@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EC2 Control</title>
+</head>
+<body>
+    <h1>EC2 Instance Control</h1>
+    <form action="/ec2" method="post">
+        <label for="instance_id">Instance ID:</label>
+        <input type="text" id="instance_id" name="instance_id" required>
+        <br>
+        <label for="action">Action:</label>
+        <select id="action" name="action" required>
+            <option value="start">Start</option>
+            <option value="stop">Stop</option>
+            <option value="reboot">Reboot</option>
+        </select>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+
