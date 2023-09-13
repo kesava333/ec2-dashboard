@@ -7,14 +7,21 @@ def index():
 @app.route('/ec2', methods=['POST'])
 def ec2():
     ec2 = boto3.client('ec2')
-    instance_id = request.form.get('instance_id')
     action = request.form.get('action')
-    if action == 'start':
-        ec2.start_instances(InstanceIds=[instance_id])
-    elif action == 'stop':
-        ec2.stop_instances(InstanceIds=[instance_id])
-    elif action == 'reboot':
-        ec2.reboot_instances(InstanceIds=[instance_id])
+    # Retrieve a list of all EC2 instances
+    instances = ec2.describe_instances()
+    
+    # Extract and format instance information
+    for reservation in instances['Reservations']:
+        for instance in reservation['Instances']:
+            instance_id = instance['InstanceId']
+            if action == 'start':
+                ec2.start_instances(InstanceIds=[instance_id])
+            elif action == 'stop':
+                ec2.stop_instances(InstanceIds=[instance_id])
+            elif action == 'reboot':
+                ec2.reboot_instances(InstanceIds=[instance_id])
+    
     return render_template('index.html')
 @app.route('/list_instances', methods=['GET'])
 def list_instances():
