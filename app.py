@@ -28,8 +28,9 @@ def list_ec2_instances():
                 'InstanceName': instance_name,  # Add instance name
             }
             instance_list.append(instance_details)
-
-    return render_template('ec2_instances.html', instances=instance_list)
+    # Calculate the instance count
+    instance_count = len(instance_list)
+    return render_template('ec2_instances.html', instances=instance_list, instance_count=instance_count)
     
 @app.route('/start_instance', methods=['POST'])
 def start_instance():
