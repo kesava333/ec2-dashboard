@@ -32,6 +32,13 @@
         tr:hover {
             background-color: #ddd;
         }
+        .running {
+        color: green;
+        }
+
+        .stopped {
+        color: red;
+        }
     </style>
 </head>
 <body>
@@ -58,7 +65,7 @@
         <td>{{ instance['InstanceID'] }}</td>
         <td>{{ instance['InstanceName'] }}</td>
         <td>{{ instance['InstanceType'] }}</td>
-        <td>{{ instance['State'] }}</td>
+        <td class="{{ instance['StateClass'] }}">{{ instance['State'] }}</td>
         <td>
             <form action="/start_instance" method="post">
                 <input type="hidden" name="instance_id" value="{{ instance['InstanceID'] }}">
