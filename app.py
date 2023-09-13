@@ -16,6 +16,19 @@ def ec2():
     elif action == 'reboot':
         ec2.reboot_instances(InstanceIds=[instance_id])
     return render_template('index.html')
+def list_instances():
+    # Retrieve a list of all EC2 instances
+    instances = ec2.describe_instances()
+    
+    # Extract and format instance information
+    instance_data = []
+    for reservation in instances['Reservations']:
+        for instance in reservation['Instances']:
+            instance_id = instance['InstanceId']
+            instance_state = instance['State']['Name']
+            instance_data.append({'InstanceID': instance_id, 'State': instance_state})
+    
+    return render_template('list_instances.html', instances=instance_data)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 
