@@ -25,7 +25,6 @@ def list_ec2_instances():
                 'InstanceID': instance['InstanceId'],
                 'InstanceType': instance['InstanceType'],
                 'State': instance['State']['Name'],
-                'PrivateIP': instance['PrivateIpAddress'],
                 'InstanceName': instance_name,  # Add instance name
             }
             instance_list.append(instance_details)
