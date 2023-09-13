@@ -3,7 +3,7 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 # Initialize the Boto3 EC2 client
-ec2 = boto3.client('ec2')
+ec2 = boto3.client('ec2', region_name='us-east-2')
 
 @app.route('/')
 def list_ec2_instances():
