@@ -50,6 +50,7 @@
         {% for instance in instances %}
         <tr>
             <td>{{ instance['InstanceID'] }}</td>
+            <td>{{ instance['InstanceName'] }}</td>
             <td>{{ instance['InstanceType'] }}</td>
             <td>{{ instance['State'] }}</td>
             <td>{{ instance['PublicDNS'] }}</td>
