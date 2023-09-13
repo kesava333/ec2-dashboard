@@ -51,6 +51,24 @@
             <td>{{ instance['State'] }}</td>
             <td>{{ instance['PublicDNS'] }}</td>
             <td>{{ instance['PrivateIP'] }}</td>
+            <td>
+                <form action="/start_instance" method="post">
+                    <input type="hidden" name="instance_id" value="{{ instance['InstanceID'] }}">
+                    <input type="submit" value="Start">
+                </form>
+            </td>
+            <td>
+                <form action="/stop_instance" method="post">
+                    <input type="hidden" name="instance_id" value="{{ instance['InstanceID'] }}">
+                    <input type="submit" value="Stop">
+                </form>
+            </td>
+            <td>
+                <form action="/terminate_instance" method="post">
+                    <input type="hidden" name="instance_id" value="{{ instance['InstanceID'] }}">
+                    <input type="submit" value="Terminate">
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </table>
